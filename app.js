@@ -70,6 +70,10 @@ app.use(chatRoutes);
 //conversation
 app.use(conversationRoutes);
 
+app.get("/", (req, res) => {
+  res.status(200).json({ success: "heroku is working!" });
+});
+
 //server
 const server = http.createServer(app);
 
