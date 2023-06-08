@@ -29,7 +29,8 @@ const addProduct = async (request, response) => {
 
     const reqfiles = [];
     // console.log("reqfiles: ", reqfiles);
-    const url = request.protocol + "://" + request.get("host");
+    // request.protocol + "://" + request.get("host"); //for local usage
+    const url = "https://rohit-goldapp-backend.herokuapp.com";
 
     if (request.files === []) {
       return response.status(500).json({ error: "no file chosen" });
