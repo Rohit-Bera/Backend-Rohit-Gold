@@ -95,6 +95,10 @@ class Mail extends EventEmitter {
         ['close', 'isIdle', 'verify'].forEach(method => {
             this[method] = (...args) => {
                 if (typeof this.transporter[method] === 'function') {
+                    if (method === 'verify' && typeof this.getSocket === 'function') {
+                        this.transporter.getSocket = this.getSocket;
+                        this.getSocket = false;
+                    }
                     return this.transporter[method](...args);
                 } else {
                     this.logger.warn(
@@ -133,7 +137,7 @@ class Mail extends EventEmitter {
      * @param {Object} data E-data description
      * @param {Function?} callback Callback to run once the sending succeeded or failed
      */
-    sendMail(data, callback) {
+    sendMail(data, callback = null) {
         let promise;
 
         if (!callback) {
