@@ -71,7 +71,7 @@ app.use(chatRoutes);
 app.use(conversationRoutes);
 
 app.get("/", (req, res) => {
-  res.status(200).json({ success: "heroku is working!" });
+  res.status(200).json({ success: "render is working!" });
 });
 
 //server
